@@ -17,7 +17,7 @@ public interface ConnectionRepository extends MongoRepository<Connection, Object
      * where clause is having condition {(user1="u1" and user2="u2") or (user1="u2" and user2="u1")}
      */
     @Query("{ $or: [ { $and: [ { 'user1Id': ?0 }, { 'user2Id': ?1 } ] }, { $and: [ { 'user1Id': ?1 }, { 'user2Id': ?0 } ] } ] }")
-    Optional<Connection> findConnectionsBetweenUsers(String user1Id, String user2Id);
+    Optional<Connection> findConnectionsBetweenUsers(ObjectId user1Id, ObjectId user2Id);
 
     @Query("{ $or: [ { 'user1Id': ?0 }, { 'user2Id': ?0 } ] }")
     List<Connection> findAllByUserId(ObjectId userId);

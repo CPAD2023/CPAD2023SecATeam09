@@ -37,8 +37,12 @@ public class ConnectionServiceImpl implements ConnectionService {
             throw new InvalidConnectionRequestException("");
         }
 
+        ObjectId user1Id = new ObjectId(connectionDTO.getUser1Id());
+        ObjectId user2Id = new ObjectId(connectionDTO.getUser2Id());
+
         Optional<Connection> oldConnection =  connectionRepository
-                .findConnectionsBetweenUsers(connectionDTO.getUser1Id(), connectionDTO.getUser2Id());
+                .findConnectionsBetweenUsers(user1Id, user2Id);
+        log.error("" + oldConnection.isPresent());
 
         if (oldConnection.isPresent() && !oldConnection.get().getStatus().equals(ConnectionStatus.REMOVED)) {
             throw new DuplicateEntryExistsException
