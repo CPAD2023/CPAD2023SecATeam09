@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("api/v1/connections/")
+@RequestMapping("api/v1/connections")
 @RequiredArgsConstructor
 public class ConnectionController {
 
@@ -29,7 +29,7 @@ public class ConnectionController {
         return new ResponseEntity<>(newConnection, HttpStatus.CREATED);
     }
 
-    @PatchMapping("{connectionId}")
+    @PatchMapping("/{connectionId}")
     public ResponseEntity<ConnectionResponseDTO> updateConnection(
             @PathVariable("connectionId") final String connectionId,
             @RequestBody final ConnectionRequestDTO connectionDTO) {
