@@ -1,6 +1,7 @@
 package in.ac.bitspilani.wilp.splitter.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import in.ac.bitspilani.wilp.splitter.enums.TransactionType;
 import in.ac.bitspilani.wilp.splitter.util.Constants;
 import lombok.*;
 import org.bson.types.ObjectId;
@@ -28,6 +29,7 @@ public class Transaction {
     private Float totalAmount;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.TIMESTAMP_FORMAT)
     private LocalDateTime timestamp;
+    private TransactionType transactionType;
     private List<TransactionDetails> users;
 
 

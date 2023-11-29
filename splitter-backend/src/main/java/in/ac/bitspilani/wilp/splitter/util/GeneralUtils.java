@@ -75,6 +75,7 @@ public class GeneralUtils {
                 .totalAmount(transactionDTO.getTotalAmount())
                 .timestamp(transactionDTO.getTimestamp() != null ? transactionDTO.getTimestamp() : LocalDateTime.now())
                 .users(transactionDetails)
+                .transactionType(transactionDTO.getTransactionType())
                 .build();
     }
 
@@ -92,6 +93,7 @@ public class GeneralUtils {
                 .totalAmount(transaction.getTotalAmount())
                 .timestamp(transaction.getTimestamp())
                 .userTransactionDetails(transactionDetailsDTOMap)
+                .transactionType(transaction.getTransactionType())
                 .build();
     }
 

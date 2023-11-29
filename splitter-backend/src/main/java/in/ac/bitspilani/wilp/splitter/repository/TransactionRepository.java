@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends MongoRepository<Transaction, ObjectId> {
     List<Transaction> findAllByUsersUserId(ObjectId userId);
-    List<Transaction> findAllByPaidByAndUsersUserId(ObjectId userId1, ObjectId userId2);
+    List<Transaction> findAllByPaidByAndUsersUserIdOrderbyTimestampDesc(ObjectId userId1, ObjectId userId2);
 }
