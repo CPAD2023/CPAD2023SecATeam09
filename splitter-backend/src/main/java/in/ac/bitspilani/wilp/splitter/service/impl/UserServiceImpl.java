@@ -13,8 +13,12 @@ import in.ac.bitspilani.wilp.splitter.util.Constants;
 import in.ac.bitspilani.wilp.splitter.util.GeneralUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -76,4 +80,18 @@ public class UserServiceImpl implements UserService {
         }
         return GeneralUtils.buildUserDTO(optionalUser.get());
     }
+
+     @Override
+    public List<UserDTO> getUserDetails(List<String> ids) {
+        List<ObjectId> userIds = new ArrayList<>();
+        ids.forEach(id -> userIds.add(new ObjectId(id)));
+        List<User> users = userRepository.findAllById(userIds);
+
+        List<UserDTO> userDTOs = new ArrayList<>();
+        users.forEach(user -> userDTOs.add(GeneralUtils.buildUserDTO(user)));
+        return userDTOs;
+    }
+
 }
+
+

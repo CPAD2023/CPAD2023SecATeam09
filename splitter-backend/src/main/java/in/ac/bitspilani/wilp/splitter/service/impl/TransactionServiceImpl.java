@@ -53,10 +53,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<TransactionDTO> getTransactionsByUserId(String userId) {
-        List<Transaction> transactions = transactionRepository.findAllByUsersUserId(new ObjectId(userId));
+        List<Transaction> transactions = transactionRepository.findAllByUsersUserIdOrderByTimestampDesc(new ObjectId(userId));
         List<TransactionDTO> transactionDTOs = new ArrayList<>();
         transactions.forEach(transaction ->
                 transactionDTOs.add(GeneralUtils.buildTransactionDTO(transaction)));
+        // transactionDTOs.sort(Comparator.comparing(TransactionDTO::getTimestamp).reversed());
         return transactionDTOs;
     }
 
@@ -73,9 +74,11 @@ public class TransactionServiceImpl implements TransactionService {
         for (Transaction transaction : transactionList2) {
             transactionDTOList.add(GeneralUtils.buildTransactionDTO(transaction));
         }
+
+        log.error(transactionDTOList.toString());
         // To sort in descending order (newest to oldest)
         transactionDTOList.sort(Comparator.comparing(TransactionDTO::getTimestamp).reversed());
-
+        log.error(transactionDTOList.toString());
         return transactionDTOList;
     }
 

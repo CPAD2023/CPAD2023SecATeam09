@@ -13,7 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 @Slf4j
 @RestController
@@ -50,5 +53,11 @@ public class UserController {
     public ResponseEntity<List<TransactionDTO>> getAllTransactions (@PathVariable final String userId) {
         List<TransactionDTO> transactions = transactionService.getTransactionsByUserId(userId);
         return new ResponseEntity<>(transactions, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAllUsersFromList (@RequestBody final List<String> userIds) {
+        List<UserDTO> userDTOs = userService.getUserDetails(userIds);
+        return new ResponseEntity<>(userDTOs, HttpStatus.OK);
     }
 }
