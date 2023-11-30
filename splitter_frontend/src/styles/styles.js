@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   btn: {
-    height: 50,
+    height: 40,
     borderRadius: 10
   },
   linkText: {

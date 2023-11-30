@@ -1,3 +1,5 @@
+import {styles as appStyles} from './styles'
+
 export const getTime = (sDate: string) => {
   let date: Date = new Date(sDate);
   let day: number = date.getDate();
@@ -34,4 +36,25 @@ export const getMonth = (sDate: string) => {
   let date: Date = new Date(sDate);
   const aMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   return aMonth[date.getMonth()];
+}
+
+export const totalAmountPaidForOtherUser = (transactions, paidByUserId, anotherUserId) => {
+  const txnTotal = transactions.filter(txn => txn.paidBy === paidByUserId 
+                            && txn.userTransactionDetails[paidByUserId]
+                            && txn.userTransactionDetails[anotherUserId]
+                            && txn.userTransactionDetails[anotherUserId].status === 'UNSETTLED')
+        .reduce((partialSum, txn) => partialSum + txn.userTransactionDetails[anotherUserId].amount, 0)
+  
+  return txnTotal
+}
+
+export const getTextColor = (amount=0) => {
+  if(amount < 0)   return appStyles.negativeTxt
+  else if(amount > 0) return appStyles.positiveTxt
+  else return appStyles.settledUpTxt
+}
+export const getText = (amount=0) => {
+  if(amount < 0)   return 'you owe'
+  else if(amount > 0) return 'you lent'
+  else return 'settled up'
 }
