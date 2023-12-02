@@ -129,7 +129,7 @@ export default function FriendsTransaction(props: FriendsTransactionProps) {
             <Text style={[appStyles.darkFontColor,styles.userNameTxt]}>{anotherUser.fullName}</Text>
             {
               connection.status === 'APPROVED' &&
-              (<Text style={[styles.secondaryText, getTextColor(total)]}> 
+              (<Text style={[appStyles.darkFontColor, styles.secondaryText, getTextColor(total)]}> 
                 {getText(total)} {total != 0 && `₹${Math.abs(total).toFixed(2)}`}  {getText(total) === 'settled up' ? '' : `to ${anotherUser.fullName}`}
               </Text>)
             }
@@ -194,8 +194,8 @@ export default function FriendsTransaction(props: FriendsTransactionProps) {
                 connection.user2.userId === user.userId ? (
                   <View>
                     <View style={styles.awaitingBodyTxtContainer}>
-                      <Text>{connection.user1.fullName} has sent you a connection request to initiate a transaction.</Text>
-                      <Text>Accepting this request will allow both parties to securely share transaction details and split expenses. Do you want to accept the connection request?</Text>
+                      <Text style = {[appStyles.darkFontColor]}>{connection.user1.fullName} has sent you a connection request to initiate a transaction.</Text>
+                      <Text style = {[appStyles.darkFontColor]}>Accepting this request will allow both parties to securely share transaction details and split expenses. Do you want to accept the connection request?</Text>
                     </View>
                     <TouchableOpacity
                       style={[appStyles.btn, appStyles.btnGreen, styles.btn]}

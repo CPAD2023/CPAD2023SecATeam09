@@ -45,8 +45,8 @@ export default function FriendCardFragment(connection: ConnectionCardProps): JSX
             {
                 connection.status === 'APPROVED' && (
                     <View>
-                        <Text style={[styles.miniTxt, getTextColor(total)]}>{getText(total)}</Text>
-                        <Text style={getTextColor(total)}>{total != 0 && `₹${Math.abs(total).toFixed(2)}`}</Text>
+                        <Text style={[appStyles.darkFontColor, styles.miniTxt, getTextColor(total)]}>{getText(total)}</Text>
+                        <Text style={[appStyles.darkFontColor, getTextColor(total)]}>{total != 0 && `₹${Math.abs(total).toFixed(2)}`}</Text>
                     </View>
                 )
             }
