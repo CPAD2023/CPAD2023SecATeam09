@@ -76,23 +76,23 @@ export default function TransactionDetails(props: TransactionDeatils) {
         </View>
         <View>
           <View>
-            <Text style={styles.detailHeaderTxt}>Transcation ID:</Text>
+            <Text style={[appStyles.darkFontColor, styles.detailHeaderTxt]}>Transcation ID:</Text>
             <Text style={appStyles.darkFontColor}>{transaction.transactionId}</Text>
           </View>
           <View>
-            <Text style={styles.detailHeaderTxt}>Paid By:</Text>
+            <Text style={[appStyles.darkFontColor, styles.detailHeaderTxt]}>Paid By:</Text>
             <Text style={appStyles.darkFontColor}>{getUserName(transaction.paidBy)}</Text>
           </View>
           <View>
-            <Text style={styles.detailHeaderTxt}>Transaction Date:</Text>
+            <Text style={[appStyles.darkFontColor, styles.detailHeaderTxt]}>Transaction Date:</Text>
             <Text style={appStyles.darkFontColor}>{getTime(transaction.timestamp)}</Text>
           </View>
           <View>
-            <Text style={styles.detailHeaderTxt}>Total Amount:</Text>
+            <Text style={[appStyles.darkFontColor, styles.detailHeaderTxt]}>Total Amount:</Text>
             <Text style={appStyles.darkFontColor}>₹ {transaction.totalAmount.toFixed(2)}</Text>
           </View>
           <View>
-            <Text style={styles.detailHeaderTxt}>Description:</Text>
+            <Text style={[appStyles.darkFontColor, styles.detailHeaderTxt]}>Description:</Text>
             <Text style={appStyles.darkFontColor}>{transaction.description}</Text>
           </View>
         </View>
@@ -111,7 +111,7 @@ export default function TransactionDetails(props: TransactionDeatils) {
                   </View>
               </View>
               <View style={styles.rightContainer}>
-                <Text>₹ {item[1].amount.toFixed(2)}</Text>
+                <Text style = {[appStyles.darkFontColor]}>₹ {item[1].amount.toFixed(2)}</Text>
               </View>
           </View>
           )}

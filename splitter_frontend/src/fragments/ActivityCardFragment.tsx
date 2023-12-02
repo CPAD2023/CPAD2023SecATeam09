@@ -69,7 +69,7 @@ export default function ActivityCardFragment(transaction: ActivityProps) {
         <Text style={[styles.amount, {color:user.userId===paidBy ? appStyles.positiveTxt.color : appStyles.negativeTxt.color}]}>
           { user.userId===paidBy ? 'You get back': 'You owe'} ₹{getAmount()}
         </Text>
-        <Text style={styles.date}>{getTime(timestamp)}</Text>
+        <Text style={[appStyles.darkFontColor, styles.date]}>{getTime(timestamp)}</Text>
       </View>
     </View>
   )

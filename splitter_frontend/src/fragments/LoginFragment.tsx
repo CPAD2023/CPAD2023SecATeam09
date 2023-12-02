@@ -49,7 +49,7 @@ export default function LoginFragment() {
                   />
               </View>
               <TextInput
-                style={styles.inputStyle}
+                style={[appStyles.darkFontColor, styles.inputStyle]}
                 placeholder='Phone Number'
                 placeholderTextColor={appStyles.textInputPlaceholder.color}    
                 keyboardType='numeric'  
@@ -66,7 +66,7 @@ export default function LoginFragment() {
                   />
               </View>
               <TextInput
-                style={styles.inputStyle}
+                style={[appStyles.darkFontColor, styles.inputStyle]}
                 placeholder='Password' 
                 secureTextEntry={true}
                 placeholderTextColor={appStyles.textInputPlaceholder.color}   

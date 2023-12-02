@@ -45,7 +45,7 @@ export default function ConnectionScreen({navigation}: FriendProps) {
         </TouchableOpacity>
       </View>
       {
-        !connections ? (<><Text>No Connection Available</Text></>) : (
+        !connections ? (<><Text style = {[appStyles.darkFontColor]}>No Connection Available</Text></>) : (
           <FlatList
             style={styles.flatList}
             data={connections}
