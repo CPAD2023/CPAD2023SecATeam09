@@ -97,22 +97,22 @@ export default function FriendsTransaction(props: FriendsTransactionProps) {
             size={25}
           />
         </TouchableOpacity>
-        <View>
-        <TextInput
-            style={styles.inputStyle}
-            placeholder='Enter total amount'
-            placeholderTextColor={appStyles.textInputPlaceholder.color}     
-            onChangeText={(val) => setSettleUpTxn({...settleUpTxn, totalAmount: Number(val)})}  
-            value={'' + settleUpTxn.totalAmount}
-            keyboardType='numeric'
-          />
-          <Text style={[appStyles.darkFontColor]}>
-            {
-              total > 0 ? `${anotherUser.fullName} paid You.` : `You paid ${anotherUser.fullName}.`
-            }
-            
-          </Text>
-          <Text style={[appStyles.darkFontColor]}>{settleUpTxn.description}</Text>
+        <View style={styles.popoverContent}>
+          <TextInput
+              style={styles.inputStyle}
+              placeholder='Enter total amount'
+              placeholderTextColor={appStyles.textInputPlaceholder.color}     
+              onChangeText={(val) => setSettleUpTxn({...settleUpTxn, totalAmount: Number(val)})}  
+              value={'' + settleUpTxn.totalAmount}
+              keyboardType='numeric'
+            />
+            <Text style={[appStyles.darkFontColor]}>
+              {
+                total > 0 ? `${anotherUser.fullName} paid You.` : `You paid ${anotherUser.fullName}.`
+              }
+              
+            </Text>
+            <Text style={[appStyles.darkFontColor]}>{settleUpTxn.description}</Text>
         </View>
       </Popover>
     )
@@ -330,6 +330,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-end',
     marginRight: 10
+  },
+  popoverContent: {
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   inputStyle: {
     backgroundColor: '#2C3335',

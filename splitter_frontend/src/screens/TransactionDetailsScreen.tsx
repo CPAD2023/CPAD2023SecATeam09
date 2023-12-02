@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, TextInput } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TextInput, Dimensions } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {faFileInvoiceDollar, faUser} from '@fortawesome/free-solid-svg-icons'
@@ -10,6 +10,7 @@ import { styles as appStyles } from '../styles/styles'
 import { ActivityStackParamList } from '../navigators/ActivityNavigator'
 import AppContext from '../context/AppContext'
 import { getTransactionUsers } from '../apiContoller/api'
+import LoadingScreen from './LoadingScreen'
 
 type TransactionDeatils = NativeStackScreenProps<ConnectionStackParamList | ActivityStackParamList, 'TransactionDetails'>
 
@@ -20,6 +21,7 @@ const icon = {
 
 export default function TransactionDetails(props: TransactionDeatils) {
   const [transactionUsers, setTransactionUsers] = useState([])
+  const [loading, setLoading] = useState(false);
   const {
     isUserSignedIn, 
     setUserSignedIn, 
@@ -39,6 +41,7 @@ export default function TransactionDetails(props: TransactionDeatils) {
   const userTransactionDetails = Object.entries(transaction.userTransactionDetails);
   useEffect(() => {
     const getUsers = async () => {
+      setLoading(true);
       const txnUsers = Object.keys(transaction.userTransactionDetails);
       console.log("USERS",txnUsers);
       const response = await getTransactionUsers(txnUsers);
@@ -46,27 +49,12 @@ export default function TransactionDetails(props: TransactionDeatils) {
         const responseData = await response.json();
         setTransactionUsers(responseData);
       }
+      setLoading(false);
     }
 
     getUsers();
   }, [])
   
-  const getUsersApiCallData = [
-    {
-      userId: "6547d449b51c515e9e34c728",
-      fullName: "Arpan Mahato",
-      email: "test@abc.com",
-      phoneNumber: "8797021466",
-      upiId: "text@sbi.com"
-    },
-    {
-        userId: "6547d49bb51c515e9e34c72a",
-        fullName: "Joy",
-        email: "test1@abc.com",
-        phoneNumber: "8797021467",
-        upiId: "text1@sbi.com"
-    },
-  ]
 
   const getUserName = (transactionUserId: string) => {
     const user = transactionUsers.find((user) => user.userId === transactionUserId);
@@ -75,7 +63,10 @@ export default function TransactionDetails(props: TransactionDeatils) {
   
   return (
     <View>
-      <View style={styles.headerContainer}>
+      {
+        loading ? <LoadingScreen LoadingPageHeight={Dimensions.get('window').height}/> : (
+          <View>
+                  <View style={styles.headerContainer}>
         <View style={styles.iconContainer}>
           <FontAwesomeIcon 
             icon={faFileInvoiceDollar} 
@@ -125,6 +116,9 @@ export default function TransactionDetails(props: TransactionDeatils) {
           </View>
           )}
         />
+          </View>
+        )
+      }
     </View>
   )
 }

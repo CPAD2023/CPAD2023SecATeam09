@@ -8,11 +8,13 @@ import AppContext from '../context/AppContext';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ConnectionStackParamList } from '../navigators/ConnectionNavigator';
+import LoadingScreen from './LoadingScreen';
 
 export default function AddConnectionScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchSuccess, setIsSearchSuccess] = useState(false);
   const [searchResult, setSearchResult] = useState({})
+  const [loading, setLoading] = useState(false);
   const {user,connections,setConnections} = useContext(AppContext);
   const navigation = useNavigation<NativeStackNavigationProp<ConnectionStackParamList>>();
   const search = async () => {
@@ -22,7 +24,6 @@ export default function AddConnectionScreen() {
       setSearchResult(responseData);
       setIsSearchSuccess(true)
     }
-    
   }
 
   const AddConnectionPopoverUserCard = ({searchedUser}) => {
