@@ -31,6 +31,10 @@ export default function ConnectionScreen({navigation}: FriendProps) {
     setTransactions
   } = useContext(AppContext);
 
+  useEffect(() => {
+  }, [transactions, connections])
+  
+
   
 
   return (

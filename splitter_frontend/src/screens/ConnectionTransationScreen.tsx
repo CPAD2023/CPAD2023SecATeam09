@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Dimensions, TextInput} from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Dimensions, TextInput, Button} from 'react-native'
 import React, { useContext, useState, useEffect } from 'react'
 import {NativeStackScreenProps, NativeStackNavigationProp} from '@react-navigation/native-stack'
 import { ConnectionStackParamList } from '../navigators/ConnectionNavigator'
@@ -11,7 +11,7 @@ import Popover from 'react-native-popover-view/dist/Popover'
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 import AppContext from '../context/AppContext'
 import { getText, getTextColor, totalAmountPaidForOtherUser } from '../formatter'
-import { updateConnection } from '../apiContoller/api'
+import { createTransaction, updateConnection } from '../apiContoller/api'
 
 const icon = {
   color: "#FFFFFF",
@@ -66,22 +66,36 @@ export default function FriendsTransaction(props: FriendsTransactionProps) {
 
   const SettleUpPopover = () => {
     const amount = Number(Math.abs(total).toFixed(2))
+    const {user1, user2} = connection;
     const newTransactionDetails = {
-      [anotherUser.userId]: {
-        amount: amount,
+      [user1.userId]: {
+        amount: 0.0,
+        status: 'UNSETTLED'
+      },
+      [user2.userId]: {
+        amount: 0.0,
         status: 'UNSETTLED'
       }
     };
     const [settleUpTxn, setSettleUpTxn] = useState({
       tranasctionId: '',
-      paidBy: anotherUser.userId,
+      paidBy: user.userId,
       description: 'Recorded as cash payment.',
       totalAmount: amount,
-      transactionType: 'SETTLE-UP',
+      transactionType: 'SETTLE_UP',
       userTransactionDetails: newTransactionDetails
     } )
     
-    
+    const settleUp = async () => {
+      settleUpTxn.userTransactionDetails[user.userId].amount = settleUpTxn.totalAmount;
+      settleUpTxn.userTransactionDetails[anotherUser.userId].amount = 0.0;
+      const response = await createTransaction(settleUpTxn);
+      if(response.status === 201) {
+        const responseData = await response.json();
+        setTransactions([responseData, ...transactions])
+      }
+      setIsSettleUpVisible(false);
+    }
 
     return(
       <Popover
@@ -98,7 +112,7 @@ export default function FriendsTransaction(props: FriendsTransactionProps) {
           />
         </TouchableOpacity>
         <View style={styles.popoverContent}>
-          <TextInput
+        <TextInput
               style={styles.inputStyle}
               placeholder='Enter total amount'
               placeholderTextColor={appStyles.textInputPlaceholder.color}     
@@ -106,6 +120,13 @@ export default function FriendsTransaction(props: FriendsTransactionProps) {
               value={'' + settleUpTxn.totalAmount}
               keyboardType='numeric'
             />
+            <TouchableOpacity
+              style={[appStyles.btn, appStyles.btnBlue, styles.btn, {paddingHorizontal: 20}]}
+              onPress={() => settleUp()}
+            >
+              <FontAwesomeIcon icon={faMoneyCheckDollar} size={20} style={styles.btnIcon}/>
+              <Text style={[appStyles.darkFontColor, styles.btnText]}>Settle Up</Text>
+            </TouchableOpacity>
             <Text style={[appStyles.darkFontColor]}>
               {
                 total > 0 ? `${anotherUser.fullName} paid You.` : `You paid ${anotherUser.fullName}.`

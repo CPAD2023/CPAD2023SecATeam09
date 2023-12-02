@@ -1,5 +1,6 @@
-import { ActivityIndicator, Dimensions, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import {styles as appStyles} from '../styles/styles'
 
 export default function LoadingScreen({LoadingPageHeight}) {
   
@@ -10,7 +11,7 @@ export default function LoadingScreen({LoadingPageHeight}) {
         size='large'
         color='#ccc'>
       </ActivityIndicator>
-      <Text>Loading ...</Text>
+      <Text style={appStyles.darkFontColor}>Loading ...</Text>
     </View>
   )
 }

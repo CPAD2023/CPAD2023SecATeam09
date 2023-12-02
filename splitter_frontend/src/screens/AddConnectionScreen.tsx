@@ -83,7 +83,7 @@ export default function AddConnectionScreen() {
             </TouchableOpacity>
           </View>
           {
-            isSearchSuccess ? (<AddConnectionPopoverUserCard searchedUser={searchResult} />) : (<Text>Search user by email or phone number!!!</Text>)
+            isSearchSuccess ? (<AddConnectionPopoverUserCard searchedUser={searchResult} />) : (<Text style={appStyles.darkFontColor}>Search user by email or phone number!!!</Text>)
           }
         </View>
   )
