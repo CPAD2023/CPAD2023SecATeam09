@@ -59,7 +59,7 @@ export default function MainScreen() {
   return (
     <>
       {
-          !isUserSignedIn ? (
+          isUserSignedIn ? (
             <NavigationContainer>
               <BottomNavigator />
             </NavigationContainer>

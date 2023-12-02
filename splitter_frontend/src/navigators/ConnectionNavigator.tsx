@@ -1,50 +1,50 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { styles as appStyles } from '../../styles'
-import FriendsScreen from '../screens/FriendsScreen'
-import FriendsTransaction from '../screens/FriendsTransaction'
-import TransactionDetails from '../screens/TransactionDetails'
-import AddFriendScreen from '../screens/AddFriendScreen'
+import { styles as appStyles } from '../styles/styles'
+import ConnectionScreen from '../screens/ConnectionScreen'
+import ConnectionTransationScreen from '../screens/ConnectionTransationScreen'
+import TransactionDetailsScreen from '../screens/TransactionDetailsScreen'
 import AddExpenseScreen from '../screens/AddExpenseScreen'
+import AddConnectionScreen from '../screens/AddConnectionScreen'
 
-export type FriendStackParamList = {
-  FriendsScreen: undefined,
-  FriendsTransaction: object,
-  TransactionDetails: object,
-  AddFriend: undefined,
-  AddExpense: object
+export type ConnectionStackParamList = {
+  ConnectionScreen: undefined,
+  ConnectionTransationScreen: object,
+  TransactionDetailsScreen: object,
+  AddConnectionScreen: undefined,
+  AddExpenseScreen: object
 }
 
-const Stack = createNativeStackNavigator<FriendStackParamList>();
+const Stack = createNativeStackNavigator<ConnectionStackParamList>();
 
 export default function FriendsStackNavigation() {
   return (
       <Stack.Navigator 
-        initialRouteName='FriendsScreen'
+        initialRouteName='ConnectionScreen'
         screenOptions={{
           headerShown: false,
           contentStyle: [appStyles.darkAppContainer]
         }}    
       >
         <Stack.Screen
-          name='FriendsScreen'
-          component={FriendsScreen}
+          name='ConnectionScreen'
+          component={ConnectionScreen}
         />
         <Stack.Screen
-          name='FriendsTransaction'
-          component={FriendsTransaction}
+          name='ConnectionTransationScreen'
+          component={ConnectionTransationScreen}
         />
         <Stack.Screen
-          name='TransactionDetails'
-          component={TransactionDetails}
+          name='TransactionDetailsScreen'
+          component={TransactionDetailsScreen}
         />
         <Stack.Screen
-          name='AddFriend'
-          component={AddFriendScreen}
+          name='AddConnectionScreen'
+          component={AddConnectionScreen}
         />
         <Stack.Screen
-          name='AddExpense'
+          name='AddExpenseScreen'
           component={AddExpenseScreen}
         />
       </Stack.Navigator>

@@ -1,20 +1,20 @@
-import { Button, Dimensions, Pressable, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {Dimensions, Pressable, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useContext, useEffect } from 'react'
 import type { PropsWithChildren } from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {faUser} from '@fortawesome/free-solid-svg-icons'
-import {styles as appStyles} from '../../styles'
+import {styles as appStyles} from '../styles/styles'
 import AppContext from '../context/AppContext'
-import { getText, getTextColor, totalAmountPaidForOtherUser } from '../../formatter'
+import { getText, getTextColor, totalAmountPaidForOtherUser } from '../formatter'
 
-type FriendCardProps = PropsWithChildren<Connection>;
+type ConnectionCardProps = PropsWithChildren;
 
 const icon = {
     color: "#FFFFFF",
     size: 30
 }
 
-export default function FriendCardFragment(connection: FriendCardProps): JSX.Element {
+export default function FriendCardFragment(connection: ConnectionCardProps): JSX.Element {
     const {
         user,
         transactions

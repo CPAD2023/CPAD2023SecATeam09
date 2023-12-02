@@ -112,53 +112,14 @@ export const getUserTransactions = async userId => {
 }
 
 
-
-
-
-// const currentUser = {
-//   fullName: "Arpan Mahato",
-//   email: "test@abc.com",
-//   phoneNumber: "8797021466",
-//   upiId: "text@sbi.com"
-// } 
-
-// const connection = {
-//   user1Id: '655c40704684586cf4add325',
-//   user2Id: '655c40424684586cf4add324'
-// }
-
-// const transaction = {
-//   "paidBy": "655c3feb4684586cf4add323",
-//   "description": "Food",
-//   "totalAmount": 100.0,
-//   "userTransactionDetails": {
-//     "655c3feb4684586cf4add323": {
-//       "amount": 50.0,
-//     },
-//     "655c3feb4684586cf4add324": {
-//       "amount": 50.0,
-//     }
-//   }
-// }
-
-// const updatedTransaction = {
-//   transactionId: '656386d1e55d7210aaa6b9e6',
-//   "paidBy": "655c3feb4684586cf4add323",
-//   "description": "Food",
-//   "totalAmount": 100.0,
-//   "timestamp": '2023-11-26T23:26:33.7805073',
-//   "userTransactionDetails": {
-//     "655c3feb4684586cf4add323": {
-//       "amount": 50.0,
-//       "status": 'SETTLED'
-//     },
-//     "655c3feb4684586cf4add324": {
-//       "amount": 50.0,
-//       "status": "SETTLED"
-//     }
-//   }
-// }
-
-
-// updateTransaction(updatedTransaction)
-
+export const getTransactionUsers = async userIdList => {
+  const response = await fetch(`${BASE_URL}/users/transactionUsers`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userIdList)
+  })
+  return response;
+}

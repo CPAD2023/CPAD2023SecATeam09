@@ -1,20 +1,20 @@
 import { StyleSheet, View, FlatList, TouchableOpacity, Text, Dimensions, TextInput, BackHandler } from 'react-native'
 import React, { useState, useEffect, useContext } from 'react'
-import FriendCardFragment from '../fragments/FriendCardFragment'
+import FriendCardFragment from '../fragments/ConnectionCardFragment'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
-import { FriendStackParamList } from '../navigators/FriendsStackNavigation'
+import { ConnectionStackParamList } from '../navigators/ConnectionNavigator'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {faUserPlus, faSearch} from '@fortawesome/free-solid-svg-icons'
-import { styles as appStyles } from '../../styles'
+import { styles as appStyles } from '../styles/styles'
 import Popover from 'react-native-popover-view/dist/Popover'
 import { Placement } from 'react-native-popover-view/dist/Types'
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 import AppContext from '../context/AppContext'
-import { searchUser } from '../../api'
+import { searchUser } from '../apiContoller/api'
 
-type FriendProps = NativeStackScreenProps<FriendStackParamList, 'FriendsScreen'>;
+type FriendProps = NativeStackScreenProps<ConnectionStackParamList, 'ConnectionScreen'>;
 
-export default function FriendsScreen({navigation}: FriendProps) {
+export default function ConnectionScreen({navigation}: FriendProps) {
 
   const [isPopoverVisible, setIsPopoverVisible] = useState(false);
   const [isSearchSuccess, setIsSearchSuccess] = useState(false);
@@ -36,7 +36,7 @@ export default function FriendsScreen({navigation}: FriendProps) {
   return (
     <View >
       <View style={styles.headerIconContainer}>
-        <TouchableOpacity style={styles.headerIcon} onPress={() => navigation.navigate('AddFriend')}>
+        <TouchableOpacity style={styles.headerIcon} onPress={() => navigation.navigate('AddConnectionScreen')}>
             <FontAwesomeIcon 
                 icon={faUserPlus} 
                 color={styles.headerIcon.color} 
@@ -52,7 +52,7 @@ export default function FriendsScreen({navigation}: FriendProps) {
             keyExtractor={item => item.connectionId}
             renderItem={({item}) => (
               <TouchableOpacity
-                onPress={() => navigation.navigate('FriendsTransaction', {connectionId: item.connectionId})}
+                onPress={() => navigation.navigate('ConnectionTransationScreen', {connectionId: item.connectionId})}
               >
                 <FriendCardFragment {...item} />
               </TouchableOpacity>

@@ -6,7 +6,7 @@ import {faGooglePay} from '@fortawesome/free-brands-svg-icons'
 import {styles as appStyles} from '../styles/styles';
 import {Formik} from 'formik'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { signup } from '../apiContainer/api';
+import { signup } from '../apiContoller/api';
 import AppContext from '../context/AppContext';
 
 export default function SignupFragment() {

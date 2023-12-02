@@ -1,4 +1,4 @@
-import {styles as appStyles} from './styles'
+import {styles as appStyles} from './styles/styles'
 
 export const getTime = (sDate: string) => {
   let date: Date = new Date(sDate);

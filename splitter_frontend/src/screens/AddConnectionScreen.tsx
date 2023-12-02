@@ -1,20 +1,20 @@
 import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useContext, useState } from 'react'
-import {styles as appStyles} from '../../styles'
+import {styles as appStyles} from '../styles/styles'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faAdd, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { searchUser, sendConnectionRequest } from '../../api';
+import { searchUser, sendConnectionRequest } from '../apiContoller/api';
 import AppContext from '../context/AppContext';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { FriendStackParamList } from '../navigators/FriendsStackNavigation';
+import { ConnectionStackParamList } from '../navigators/ConnectionNavigator';
 
-export default function AddFriendScreen() {
+export default function AddConnectionScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchSuccess, setIsSearchSuccess] = useState(false);
   const [searchResult, setSearchResult] = useState({})
   const {user,connections,setConnections} = useContext(AppContext);
-  const navigation = useNavigation<NativeStackNavigationProp<FriendStackParamList>>();
+  const navigation = useNavigation<NativeStackNavigationProp<ConnectionStackParamList>>();
   const search = async () => {
     const response = await searchUser(searchQuery);
     if(response.status === 200) {

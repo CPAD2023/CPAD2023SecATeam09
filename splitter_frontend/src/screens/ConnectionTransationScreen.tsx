@@ -1,23 +1,23 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Dimensions, TextInput} from 'react-native'
 import React, { useContext, useState, useEffect } from 'react'
 import {NativeStackScreenProps, NativeStackNavigationProp} from '@react-navigation/native-stack'
-import { FriendStackParamList } from '../navigators/FriendsStackNavigation'
+import { ConnectionStackParamList } from '../navigators/ConnectionNavigator'
 import { useNavigation } from '@react-navigation/native'
-import {styles as appStyles} from '../../styles';
+import {styles as appStyles} from '../styles/styles';
 import TransactionCardFragment from '../fragments/TransactionCardFragment'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {faUser, faBell, faMoneyCheckDollar, faSquarePlus, faUserPlus, faUserXmark, faSearch, faFileInvoiceDollar, faIndianRupeeSign} from '@fortawesome/free-solid-svg-icons'
 import Popover from 'react-native-popover-view/dist/Popover'
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 import AppContext from '../context/AppContext'
-import { getText, getTextColor, totalAmountPaidForOtherUser } from '../../formatter'
-import { updateConnection } from '../../api'
+import { getText, getTextColor, totalAmountPaidForOtherUser } from '../formatter'
+import { updateConnection } from '../apiContoller/api'
 
 const icon = {
   color: "#FFFFFF",
   size: 40
 }
-type FriendsTransactionProps = NativeStackScreenProps<FriendStackParamList, 'FriendsTransaction'>
+type FriendsTransactionProps = NativeStackScreenProps<ConnectionStackParamList, 'ConnectionTransationScreen'>
 
 export default function FriendsTransaction(props: FriendsTransactionProps) {
 
@@ -33,10 +33,10 @@ export default function FriendsTransaction(props: FriendsTransactionProps) {
     setTransactions
   } = useContext(AppContext);
 
-  const {connectionId}: Connection = props.route.params;
+  const {connectionId} = props.route.params;
   const connection = connections.find(conn => conn.connectionId === connectionId);
   
-  const navigation = useNavigation<NativeStackNavigationProp<FriendStackParamList>>();
+  const navigation = useNavigation<NativeStackNavigationProp<ConnectionStackParamList>>();
   const userTransactions = 
       transactions.filter(txn => {
         const userIds = Object.keys(txn.userTransactionDetails)
@@ -148,7 +148,7 @@ export default function FriendsTransaction(props: FriendsTransactionProps) {
                 renderItem={({item}) => (
                   < TouchableOpacity
                     onPress={() => {
-                      navigation.navigate('TransactionDetails', {transactionId: item.transactionId})}}
+                      navigation.navigate('TransactionDetailsScreen', {transactionId: item.transactionId})}}
                   >
                     <TransactionCardFragment {...item}/>
                   </TouchableOpacity>
@@ -176,7 +176,7 @@ export default function FriendsTransaction(props: FriendsTransactionProps) {
                       <TouchableOpacity
                         style={[appStyles.btn, appStyles.btnGreen, styles.btn, styles.btnAdd]}
                         onPress={() => {
-                          navigation.navigate('AddExpense', {connectionId: connectionId})}}
+                          navigation.navigate('AddExpenseScreen', {connectionId: connectionId})}}
                       >
                         <FontAwesomeIcon icon={faSquarePlus} size={20} style={styles.btnIcon}/>
                         <Text style={[appStyles.darkFontColor, styles.btnText]}>Add Expense</Text>

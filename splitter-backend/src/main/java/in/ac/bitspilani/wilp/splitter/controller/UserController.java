@@ -55,7 +55,7 @@ public class UserController {
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
 
-    @GetMapping
+    @PostMapping("/transactionUsers")
     public ResponseEntity<List<UserDTO>> getAllUsersFromList (@RequestBody final List<String> userIds) {
         List<UserDTO> userDTOs = userService.getUserDetails(userIds);
         return new ResponseEntity<>(userDTOs, HttpStatus.OK);
