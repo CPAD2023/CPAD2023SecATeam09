@@ -1,4 +1,4 @@
-const BASE_URL = 'https://splitter.cfapps.us10-001.hana.ondemand.com/api/v1';
+// const BASE_URL = '<URL>/api/v1';
 const LOCAL_BASE_URL = 'http://localhost:8080/api/v1'
 
 
